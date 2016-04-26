@@ -11,14 +11,12 @@ module.exports = {
     cache: true,
     entry: {
         local: './src/js/local',
-        dnevnik: './src/js/dnevnik',
-        mosreg: './src/js/mosreg'
     },
     devtool: 'cheap-module-eval-source-map',
     output: {
-        path: __dirname + '/public/assets/js',
+        path: __dirname + '/dev/assets/js',
         filename: '[name].js',
-        publicPath: __dirname + '/public/assets/js',
+        publicPath: __dirname + '/dev/assets/js',
         pathinfo: true
     },
 

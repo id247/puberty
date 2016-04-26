@@ -32,8 +32,10 @@ var webpackConfig = require('./webpack.config.js');
 
 var isDevelopment = process.env.NODE_ENV !== 'prod' ? true : false;
 
+var destFolder = isDevelopment ? 'dev' : 'public';
+
 gulp.task('clean', function() {
-	return del('public');
+	return del(['public', 'dev']);
 });
 
 // STYLES
@@ -51,22 +53,22 @@ gulp.task('sass', function () {
 		}))
 		.pipe(cssImageDimensions())
 		.pipe(gulpIf(isDevelopment, sourcemaps.write())) 
-		.pipe(gulp.dest('public/assets/css'));  
+		.pipe(gulp.dest(destFolder + '/assets/css'));  
 });
 
 // image urls
 gulp.task('modifyCssUrls', function () {
 	const date = Math.round(new Date().getTime()/1000.0);
 
-	return gulp.src('public/assets/css/style.css')
+	return gulp.src(destFolder + '/assets/css/style.css')
 		.pipe(modifyCssUrls({
 			modify: function (url, filePath) {
-				var buffer = fs.readFileSync(url.replace('../', 'public/assets/'));				
+				var buffer = fs.readFileSync(url.replace('../', destFolder + '/assets/'));				
 	        	return url + '?_v=' + revHash(buffer);
 	      	},
 		}))		
 		.pipe(minifyCss({compatibility: 'ie8'}))
-    	.pipe(gulp.dest('public/assets/css'));
+    	.pipe(gulp.dest(destFolder + '/assets/css'));
 
 });
 
@@ -74,15 +76,15 @@ gulp.task('modifyCssUrls', function () {
 // ASSETS
 gulp.task('assets-files', function(){
 	return gulp.src('src/assets/{images,fonts}/**/*.*', {since: gulp.lastRun('assets-files')})
-		.pipe(newer('public/assets'))
-		.pipe(gulp.dest('public/assets'))
+		.pipe(newer(destFolder + '/assets'))
+		.pipe(gulp.dest(destFolder + '/assets'))
 });
 
 
 gulp.task('assets-favicon', function(){
 	return gulp.src('src/assets/favicon.ico', {since: gulp.lastRun('assets-favicon')})
-		.pipe(newer('public'))
-		.pipe(gulp.dest('public'))
+		.pipe(newer(destFolder))
+		.pipe(gulp.dest(destFolder))
 });
 
 gulp.task('sprite', function(callback) {
@@ -98,7 +100,7 @@ gulp.task('sprite', function(callback) {
 		
 
 	spriteData.img
-		.pipe(gulp.dest('public/assets/images/'))
+		.pipe(gulp.dest(destFolder + '/assets/images/'))
 
 	spriteData.css.pipe(gulp.dest('src/sass/'));
 
@@ -114,7 +116,9 @@ gulp.task('assets', gulp.parallel('assets-files', 'assets-favicon', 'sprite'));
 // HTML
 gulp.task('html', function() {
 
-	return gulp.src(['src/html/{local,dnevnik,mosreg}/**/*.html', 'src/html/oauth.html'])
+	let folders = isDevelopment ? 'local' : '{dnevnik,mosreg}';
+
+	return gulp.src(['src/html/' + folders + '/**/*.html', 'src/html/oauth.html'])
 		.pipe(fileinclude({
 			prefix: '@@',
 			basepath: '@file',
@@ -125,7 +129,7 @@ gulp.task('html', function() {
 				return file.path.indexOf('/local/') === -1;
 			}, htmlmin({collapseWhitespace: true}))
 		)
-		.pipe(gulp.dest('public'));
+		.pipe(gulp.dest(destFolder));
 });
 
 
@@ -137,11 +141,11 @@ gulp.task('html', function() {
 gulp.task('vers', function(){
 		
 
-	var cssVer =  fs.existsSync('public/assets/css/style.css') && revHash(fs.readFileSync('public/assets/css/style.css'));
-	var dnevnikVer =  fs.existsSync('public/assets/js/dnevnik.js') && revHash(fs.readFileSync('public/assets/js/dnevnik.js'));
-	var mosregVer =  fs.existsSync('public/assets/js/mosreg.js') && revHash(fs.readFileSync('public/assets/js/mosreg.js'));
+	var cssVer =  fs.existsSync(destFolder + '/assets/css/style.css') && revHash(fs.readFileSync(destFolder + '/assets/css/style.css'));
+	var dnevnikVer =  fs.existsSync(destFolder + '/assets/js/dnevnik.js') && revHash(fs.readFileSync(destFolder + '/assets/js/dnevnik.js'));
+	var mosregVer =  fs.existsSync(destFolder + '/assets/js/mosreg.js') && revHash(fs.readFileSync(destFolder + '/assets/js/mosreg.js'));
 
-	return gulp.src(['public/{dnevnik,mosreg}/*.html'])
+	return gulp.src([destFolder + '/{dnevnik,mosreg}/*.html'])
 		.pipe(gulpIf(!!cssVer, replace( /style\.css(\S*)\"/g, 'style.css?_v=' + cssVer + '"' )))
 		.pipe(gulpIf(!!dnevnikVer, replace( /dnevnik\.js(\S*)\"/g, 'dnevnik.js?_v=' + dnevnikVer + '"' )))
 		.pipe(gulpIf(!!mosregVer, replace( /mosreg\.js(\S*)\"/g, 'mosreg.js?_v=' + mosregVer + '"' )))
@@ -149,7 +153,7 @@ gulp.task('vers', function(){
 		.pipe(gulpIf(!!cssVer, replace( /\.jpg(\S*)\"/g, '.jpg?_v=' + cssVer + '"')))
 		.pipe(gulpIf(!!cssVer, replace( /\.gif(\S*)\"/g, '.gif?_v=' + cssVer + '"')))
 		.on('error', notify.onError())
-		.pipe(gulp.dest('public'));
+		.pipe(gulp.dest(destFolder));
 
 });
 
@@ -173,7 +177,7 @@ gulp.task('webpack', function(callback) {
 
 // BUILD
 gulp.task('server', function () {
-	gulp.src('public')
+	gulp.src(destFolder)
 	.pipe(server({
 		livereload: true,
 		directoryListing: false,

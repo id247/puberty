@@ -21,6 +21,6 @@ const appSettings = {
 //start the magic
 document.addEventListener('DOMContentLoaded', () => {
 
-	app.init(appSettings);
+	app(appSettings);
 
 });   

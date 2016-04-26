@@ -10,7 +10,6 @@ var pathToReactDOM = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js
 module.exports = {
 	cache: true,
 	entry: {
-		local: './src/js/local',
 		dnevnik: './src/js/dnevnik',
 		mosreg: './src/js/mosreg'
 	},
