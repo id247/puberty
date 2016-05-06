@@ -2,9 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { emit } from './lib/dispatcher';
-import actions from './lib/actions';
-import { getState, addChangeListener } from './stores/store';
+import { emit } from './flux/dispatcher';
+import actions from './flux/actions';
+import { getState, addChangeListener } from './flux/store';
 
 //pages
 // import Loading from './components/pages/loading';
