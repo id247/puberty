@@ -30,12 +30,16 @@ var gutil = require('gulp-util');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 
-var isDevelopment = process.env.NODE_ENV !== 'prod' ? true : false;
+var devMode = process.env.NODE_ENV || 'dev';
 
-var destFolder = isDevelopment ? 'dev' : 'public';
+var destFolder = 'dist';
 
-gulp.task('clean', function() {
-	return del(['public', 'dev']);
+gulp.task('clean', function(callback) {
+	if (devMode == 'prod'){
+		return del(['dist']);
+	}else{
+		callback();
+	}
 });
 
 // STYLES
@@ -44,7 +48,7 @@ gulp.task('sass', function () {
 	const date = new Date().getTime();
 
 	return gulp.src('src/sass/style.scss')
-		.pipe(gulpIf(isDevelopment, sourcemaps.init())) 
+		.pipe(gulpIf(devMode !== 'prod', sourcemaps.init())) 
 		.pipe(sass({outputStyle: 'expanded'})) 
 		.on('error', notify.onError())
 		.pipe(autoprefixer({
@@ -52,7 +56,7 @@ gulp.task('sass', function () {
 			cascade: false
 		}))
 		.pipe(cssImageDimensions())
-		.pipe(gulpIf(isDevelopment, sourcemaps.write())) 
+		.pipe(gulpIf(devMode !== 'prod', sourcemaps.write())) 
 		.pipe(gulp.dest(destFolder + '/assets/css'));  
 });
 
@@ -75,7 +79,7 @@ gulp.task('modifyCssUrls', function () {
 
 // ASSETS
 gulp.task('assets-files', function(){
-	return gulp.src('src/assets/{images,fonts}/**/*.*', {since: gulp.lastRun('assets-files')})
+	return gulp.src(['src/assets/**/*.*', '!src/assets/sprite/*.*', '!src/assets/favicon.ico'], {since: gulp.lastRun('assets-files')})
 		.pipe(newer(destFolder + '/assets'))
 		.pipe(gulp.dest(destFolder + '/assets'))
 });
@@ -116,7 +120,7 @@ gulp.task('assets', gulp.parallel('assets-files', 'assets-favicon', 'sprite'));
 // HTML
 gulp.task('html', function() {
 
-	let folders = isDevelopment ? 'local' : '{dnevnik,mosreg}';
+	let folders = devMode === 'dev' ? 'local' : '{dnevnik,mosreg}';
 
 	return gulp.src(['src/html/' + folders + '/**/*.html', 'src/html/oauth.html'])
 		.pipe(fileinclude({

@@ -14,9 +14,9 @@ module.exports = {
     },
     devtool: 'cheap-module-eval-source-map',
     output: {
-        path: __dirname + '/dev/assets/js',
+        path: __dirname + '/dist/assets/js',
         filename: '[name].js',
-        publicPath: __dirname + '/dev/assets/js',
+        publicPath: __dirname + '/dist/assets/js',
         pathinfo: true
     },
 

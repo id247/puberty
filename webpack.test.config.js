@@ -13,6 +13,7 @@ module.exports = {
 		dnevnik: './src/js/dnevnik',
 		mosreg: './src/js/mosreg'
 	},
+	devtool: 'cheap-module-eval-source-map',
 	output: {
 		path: __dirname + '/dist/assets/js',
 		filename: '[name].js',
@@ -39,27 +40,9 @@ module.exports = {
 					__dirname + '/src/js'
 				], 
 				loader: 'babel?optional[]=runtime&stage=2',
-			},
-			{ 	test: /\.js$/, 
-				include: [
-					__dirname + '/src/js'
-				], 
-				loader: 'strip-loader?strip[]=console.log' 
 			}
 		]
 	},
-	plugins: [     
-		new webpack.DefinePlugin({
-			'process.env': { 
-				NODE_ENV : JSON.stringify('production') 
-			}
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
-			compress: {
-				warnings: false
-			}
-		})
-	]
+	plugins: []
 };
 
