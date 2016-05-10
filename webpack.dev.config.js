@@ -12,7 +12,7 @@ module.exports = {
     entry: {
         local: './src/js/local',
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: '#inline-source-map',
     output: {
         path: __dirname + '/dist/assets/js',
         filename: '[name].js',

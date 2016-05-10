@@ -13,7 +13,7 @@ module.exports = {
 		dnevnik: './src/js/dnevnik',
 		mosreg: './src/js/mosreg'
 	},
-	devtool: 'cheap-module-eval-source-map',
+	devtool: '#inline-source-map',
 	output: {
 		path: __dirname + '/dist/assets/js',
 		filename: '[name].js',
