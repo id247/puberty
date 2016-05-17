@@ -156,7 +156,7 @@ gulp.task('vers', function(){
 		.pipe(gulpIf(!!cssVer, replace( /\.png(\S*)\"/g, '.png?_v=' + cssVer + '"')))
 		.pipe(gulpIf(!!cssVer, replace( /\.jpg(\S*)\"/g, '.jpg?_v=' + cssVer + '"')))
 		.pipe(gulpIf(!!cssVer, replace( /\.gif(\S*)\"/g, '.gif?_v=' + cssVer + '"')))
-		.pipe(gulpIf(!!cssVer, replace( /src\=\"assets/g, 'src="https://ad.csdnevnik.ru/special/staging/puberty/assets')))
+		.pipe(gulpIf(!!cssVer, replace( /src\=\"assets/g, 'src="https://ad.csdnevnik.ru/special/staging/puberty')))
 		.on('error', notify.onError())
 		.pipe(gulp.dest(destFolder));
 

@@ -137,13 +137,13 @@
 	}
 
 	&__blocks{
-		
+		padding: 40px 0 0;
 	}
 
 	&__block{
 		display: inline-block;
 		vertical-align: top;
-		width: 45%;
+		max-width: 480px;
 	}
 	
 }
