@@ -122,7 +122,7 @@ gulp.task('html', function() {
 
 	let folders = devMode === 'dev' ? 'local' : '{dnevnik,mosreg}';
 
-	return gulp.src(['src/html/' + folders + '/**/*.html', 'src/html/oauth.html'])
+	return gulp.src(['src/html/' + folders + '/**/*.html'])
 		.pipe(fileinclude({
 			prefix: '@@',
 			basepath: '@file',
@@ -156,6 +156,7 @@ gulp.task('vers', function(){
 		.pipe(gulpIf(!!cssVer, replace( /\.png(\S*)\"/g, '.png?_v=' + cssVer + '"')))
 		.pipe(gulpIf(!!cssVer, replace( /\.jpg(\S*)\"/g, '.jpg?_v=' + cssVer + '"')))
 		.pipe(gulpIf(!!cssVer, replace( /\.gif(\S*)\"/g, '.gif?_v=' + cssVer + '"')))
+		.pipe(gulpIf(!!cssVer, replace( /src\=\"assets/g, 'src="https://ad.csdnevnik.ru/special/staging/puberty/assets')))
 		.on('error', notify.onError())
 		.pipe(gulp.dest(destFolder));
 

@@ -14,7 +14,7 @@
 	transition: all .3s;
 	line-height: 1;
 
-	font-family: $mainFontFamily;
+	font-family: $got;
 
 	cursor: pointer;
 
@@ -38,6 +38,19 @@
 		}
 	}
 
+
+
+	&--blue{
+		background: #2f74b5;
+		color: #fff;
+		&:hover{
+			background: lighten(#2f74b5, 5%);
+		}
+		&:active{
+			background: darken(#2f74b5, 5%);
+		}
+	}
+
 	&--m{
 		border-radius: 8px;
 		font-weight: 700;
@@ -46,10 +59,10 @@
 	}
 
 	&--l{
-		border-radius: 8px;
+		border-radius: 18px;
 		font-weight: 700;
-		font-size: 15px;
-		padding: 10px 20px 10px;
+		font-size: 24px;
+		padding: 20px 40px 20px;
 	}
 
 	&--block{

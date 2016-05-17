@@ -1,66 +1,88 @@
 'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { emit } from './flux/dispatcher';
-import actions from './flux/actions';
-import { getState, addChangeListener } from './flux/store';
+const $header = $('.header');
+const $win = $(window);
+const $doc = $(document);
 
-//pages
-// import Loading from './components/pages/loading';
-
-
-//import 'babel-polyfill';
-
-const app = (settings) => {
-
-	const App = React.createClass({
-		getInitialState() {
-
-			return getState();
-		},
-		componentDidMount() {
-
-			addChangeListener(this._update);
-
-			emit(actions.SET_SETTINGS, {
-				settings: this.props.settings,
-				page: 'greeting'			
-			});
-		},
-		_update() {
-
-			this.setState(getState());
-		},
-		render() {
-
-			console.log('RENDER');
-
-			let page;
-
-			switch(this.state.page){
-				// case 'result': page = <Result 	pers={this.state.pers}
-				// 								server={this.state.settings.server}
-				// 								shares={this.state.shares}
-				// 								/>; 
-				// 	break;
-
-				// default: page = <ErrorPage />;
-			}
-
-			return (
-				<div>
-				</div>
-			)
-		}
+function goTo(){
+	$('.js-goto').on('click', function(e){
+		e.preventDefault();
+		const sectionId = parseInt($(this).attr('href').replace('#section-', ''));
+		$.fn.fullpage.moveTo(sectionId);
 	});
+}
 
-	ReactDOM.render(
-		<App 	settings={settings} 
-		/>, 
-		document.getElementById('app')
-	);
+function fullPage(){
 
-};
+    $('#fullpage').fullpage({
+        //Navigation
+        //menu: '#menu',
+        lockAnchors: true,
+        //anchors: anchors,
+        navigation: true,
+        navigationPosition: 'right',
+        //navigationTooltips: ['firstSlide', 'secondSlide'],
+        showActiveTooltip: false,
+        slidesNavigation: true,
+        slidesNavPosition: 'bottom',
 
-export default app;
+        //Scrolling
+        css3: true,
+        scrollingSpeed: 700,
+        autoScrolling: true,
+        fitToSection: true,
+        fitToSectionDelay: 1000,
+        scrollBar: false,
+        easing: 'easeInOutCubic',
+        easingcss3: 'ease',
+        loopBottom: false,
+        loopTop: false,
+        loopHorizontal: true,
+        continuousVertical: false,
+        //normalScrollElements: '#element1, .element2',
+        scrollOverflow: false,
+        touchSensitivity: 15,
+        normalScrollElementTouchThreshold: 5,
+
+        //Accessibility
+        keyboardScrolling: true,
+        animateAnchor: true,
+        recordHistory: true,
+
+        //Design
+        controlArrows: true,
+        verticalCentered: true,
+        resize : false,
+        //sectionsColor : ['#ccc', '#fff'],
+        paddingTop: '100px',
+        paddingBottom: '30px',
+        //fixedElements: '.header',
+        responsiveWidth: 0,
+        responsiveHeight: 0,
+
+        //Custom selectors
+        sectionSelector: '.content__section',
+        slideSelector: '.slide',
+
+        //events
+        onLeave: function(index, nextIndex, direction){
+        	if ( nextIndex > 1 ){
+				$header.addClass('header--visible');
+			}else{
+				$header.removeClass('header--visible');
+			}
+        },
+        afterLoad: function(anchorLink, index){},
+        afterRender: function(){},
+        afterResize: function(){},
+        afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+        onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){}
+    });
+}
+
+$(document).ready(function() {
+
+	goTo();
+	fullPage();
+
+});

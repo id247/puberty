@@ -11,22 +11,22 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
-$about-9-name: 'about-9';
-$about-9-x: 0px;
-$about-9-y: 0px;
-$about-9-offset-x: 0px;
-$about-9-offset-y: 0px;
-$about-9-width: 28px;
-$about-9-height: 28px;
-$about-9-total-width: 28px;
-$about-9-total-height: 28px;
-$about-9-image: '../images/sprite.png';
-$about-9: (0px, 0px, 0px, 0px, 28px, 28px, 28px, 28px, '../images/sprite.png', 'about-9', );
-$spritesheet-width: 28px;
-$spritesheet-height: 28px;
+$logo-name: 'logo';
+$logo-x: 0px;
+$logo-y: 0px;
+$logo-offset-x: 0px;
+$logo-offset-y: 0px;
+$logo-width: 113px;
+$logo-height: 40px;
+$logo-total-width: 113px;
+$logo-total-height: 40px;
+$logo-image: '../images/sprite.png';
+$logo: (0px, 0px, 0px, 0px, 113px, 40px, 113px, 40px, '../images/sprite.png', 'logo', );
+$spritesheet-width: 113px;
+$spritesheet-height: 40px;
 $spritesheet-image: '../images/sprite.png';
-$spritesheet-sprites: ($about-9, );
-$spritesheet: (28px, 28px, '../images/sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($logo, );
+$spritesheet: (113px, 40px, '../images/sprite.png', $spritesheet-sprites, );
 
 /*
 The provided mixins are intended to be used with the array-like variables
