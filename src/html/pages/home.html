@@ -1,12 +1,16 @@
 <header class="header">
 
 	<div class="header__wrap wrap">
+
+		@@if (server !== "mosreg"){
 		
 		<div class="header__logo">
 			
 			<a href="https://dnevnik.ru" class="logo">Дневник</a>
 
 		</div><!-- /.header__logo -->
+
+		}
 		
 		<h1 class="header__title">
 			Как и когда поговорить с дочкой о половом созревании?
@@ -21,12 +25,16 @@
 
 	<div class="content__section section home" id="section-1">
 
+		@@if (server !== "mosreg"){
+
 		<div class="home__logo">
 			
 			<a href="https://dnevnik.ru" class="logo">Дневник</a>
 
 		</div><!-- /.home__logo -->
-					
+		
+		}
+
 		<h2 class="home__title">
 			Как и когда поговорить с дочкой<br>
 			о половом созревании?
@@ -384,7 +392,8 @@
 
 									<div class="results__text">
 										говорили,<br>
-										когда они начались
+										когда она<br>
+										началась
 									</div><!-- /.results__text -->
 							
 								</li> <!-- /.results__item -->
