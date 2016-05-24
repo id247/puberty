@@ -1,14 +1,20 @@
 <header class="header">
 
 	<div class="header__wrap wrap">
+		
+		<div class="header__always">
+			
+			<span class="logo logo--always">Always</span>
+
+		</div><!-- /.header__always -->
 
 		@@if (server !== "mosreg"){
 		
-		<div class="header__logo">
+		<div class="header__dnevnik">
 			
-			<a href="https://dnevnik.ru" class="logo">Дневник</a>
+			<a href="https://dnevnik.ru" class="logo logo--dnevnik">Дневник</a>
 
-		</div><!-- /.header__logo -->
+		</div><!-- /.header__dnevnik -->
 
 		}
 		
@@ -29,11 +35,17 @@
 
 		<div class="home__logo">
 			
-			<a href="https://dnevnik.ru" class="logo">Дневник</a>
+			<a href="https://dnevnik.ru" class="logo logo--dnevnik">Дневник</a>
 
 		</div><!-- /.home__logo -->
 		
 		}
+
+		<div class="home__always">
+			
+			<span class="logo logo--always-big">Always</span>
+
+		</div><!-- /.home__always -->
 
 		<h2 class="home__title">
 			Как и когда поговорить с дочкой<br>

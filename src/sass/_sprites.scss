@@ -11,22 +11,44 @@ $icon-home: x y offset_x offset_y width height total_width total_height image_pa
 At the bottom of this section, we provide information about the spritesheet itself
 $spritesheet: width height image $spritesheet-sprites;
 */
+$always-big-name: 'always-big';
+$always-big-x: 0px;
+$always-big-y: 0px;
+$always-big-offset-x: 0px;
+$always-big-offset-y: 0px;
+$always-big-width: 230px;
+$always-big-height: 103px;
+$always-big-total-width: 230px;
+$always-big-total-height: 153px;
+$always-big-image: '../images/sprite.png';
+$always-big: (0px, 0px, 0px, 0px, 230px, 103px, 230px, 153px, '../images/sprite.png', 'always-big', );
+$always-name: 'always';
+$always-x: 0px;
+$always-y: 103px;
+$always-offset-x: 0px;
+$always-offset-y: -103px;
+$always-width: 113px;
+$always-height: 50px;
+$always-total-width: 230px;
+$always-total-height: 153px;
+$always-image: '../images/sprite.png';
+$always: (0px, 103px, 0px, -103px, 113px, 50px, 230px, 153px, '../images/sprite.png', 'always', );
 $logo-name: 'logo';
-$logo-x: 0px;
-$logo-y: 0px;
-$logo-offset-x: 0px;
-$logo-offset-y: 0px;
+$logo-x: 113px;
+$logo-y: 103px;
+$logo-offset-x: -113px;
+$logo-offset-y: -103px;
 $logo-width: 113px;
-$logo-height: 40px;
-$logo-total-width: 113px;
-$logo-total-height: 40px;
+$logo-height: 50px;
+$logo-total-width: 230px;
+$logo-total-height: 153px;
 $logo-image: '../images/sprite.png';
-$logo: (0px, 0px, 0px, 0px, 113px, 40px, 113px, 40px, '../images/sprite.png', 'logo', );
-$spritesheet-width: 113px;
-$spritesheet-height: 40px;
+$logo: (113px, 103px, -113px, -103px, 113px, 50px, 230px, 153px, '../images/sprite.png', 'logo', );
+$spritesheet-width: 230px;
+$spritesheet-height: 153px;
 $spritesheet-image: '../images/sprite.png';
-$spritesheet-sprites: ($logo, );
-$spritesheet: (113px, 40px, '../images/sprite.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($always-big, $always, $logo, );
+$spritesheet: (230px, 153px, '../images/sprite.png', $spritesheet-sprites, );
 
 /*
 The provided mixins are intended to be used with the array-like variables

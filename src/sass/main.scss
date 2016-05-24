@@ -21,10 +21,21 @@
  * ========================================================================== */
 
 .logo{
-	@include sprite($logo);
 	text-indent: -9999px;
 	display: inline-block;
 	text-align: left;
+
+	&--dnevnik{
+		@include sprite($logo);
+	}
+
+	&--always{
+		@include sprite($always);
+	}
+
+	&--always-big{
+		@include sprite($always-big);
+	}
 }
 
 /* ==========================================================================
@@ -49,12 +60,16 @@
 		opacity: 1;
 	}
 
-	&__logo{
+	&__always{
 		float: left;
 	}
 
+	&__dnevnik{
+		float: right;
+	}
+
 	&__title{
-		margin: 15px 170px;
+		margin: 19px 170px 0;
 		text-align: center;
 		font-size: 18px;
 		font-weight: 400;
@@ -250,6 +265,10 @@
 		left: 0;
 		right: 0;
 		margin: auto;
+	}
+
+	&__always{
+		margin: 0 0 40px;
 	}
 
 	&__title{
